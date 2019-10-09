@@ -20,6 +20,10 @@ let userSchema = new mongoose.Schema({
       minlength: 8,
       maxlength: 32
     },
+    events: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Event'
+   }],
     myEvent: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Event'

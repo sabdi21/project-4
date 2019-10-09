@@ -13,6 +13,7 @@ import Landing from "views/main/Landing.jsx";
 import Login from "views/main/Login.jsx";
 import Profile from "views/main/Profile.jsx";
 import SignUp from "views/main/SignUp";
+import NewEvents from 'views/EventPlanner/NewEvents';
 
 class App extends React.Component {
     state = {
@@ -31,7 +32,7 @@ class App extends React.Component {
     }
 
     getUser = () => {
-        console.log('in getUSER')
+        console.log('in getUSER is firing')
         //See if there is a token
         let token = localStorage.getItem('mernToken')
 
@@ -57,30 +58,38 @@ class App extends React.Component {
     render() {
         return (
             <BrowserRouter>
-            <Switch>
-            <Route path="/" exact render={props => <Landing {...props} />} />
-            {/* <Route
-                path="/"
-                exact
-                render={props => <Landing {...props} />}
-            /> */}
-            <Route path="/login" exact render={props => <Login {...props} updateUser={this.getUser} user={this.state.user}/>} />
-            <Route
-                path="/profile"
-                exact
-                render={props => <Profile {...props} updateUser={this.getUser} user={this.state.user}/>}
-            />
-            <Route
-                path="/signup"
-                exact
-                render={props => <SignUp {...props} updateUser={this.getUser} user={this.state.user} />}
-                />
-                <Route
-                    path="/login"
-                    exact
-                    render={props => <Login {...props} updateUser={this.getUser} user={this.state.user}/>}
-                />
-                <Redirect to="/" updateUser={this.getUser} user={this.state.user}h/>
+                <Switch>
+                    <Route path="/" exact render={props => <Landing {...props} />} />
+                    {/* <Route
+                        path="/"
+                        exact
+                        render={props => <Landing {...props} />}
+                    /> */}
+                    <Route path="/login" 
+                        exact 
+                        render={props => <Login {...props} updateUser={this.getUser} user={this.state.user}/>} />
+                    <Route
+                        path="/profile"
+                        exact
+                        render={props => <Profile {...props} updateUser={this.getUser} user={this.state.user}/>}
+                    />
+                    <Route
+                        path="/signup"
+                        exact
+                        render={props => <SignUp {...props} updateUser={this.getUser} user={this.state.user} />}
+                        />
+                    <Route
+                        path="/login"
+                        exact
+                        render={props => <Login {...props} updateUser={this.getUser} user={this.state.user}/>}
+                    />
+                    <Route
+                        path="/newevents"
+                        exact
+                        render={props => <NewEvents {...props} updateUser={this.getUser} user={this.state.user}/>}
+                    />
+
+                    <Redirect to="/" updateUser={this.getUser} user={this.state.user}h/>
                 </Switch>
             </BrowserRouter>
             );

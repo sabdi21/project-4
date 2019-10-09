@@ -26,8 +26,9 @@ app.use('/auth',expressJWT({
         {url: '/auth/signup', methods: ['POST']},
         // {url: '/auth/current/user', methods: ['PUT']}   
     ]
-}), require('./controllers/auth'))
-app.use('/event', require('./controllers/event'))
+}), require('./controllers/auth'));
+
+app.use('/event', require('./controllers/event'));
 
 
 //routes

@@ -30,23 +30,23 @@ class Login extends React.Component {
   state = {
     email: '',
     password: '',
-    message: ''
+    // message: ''
 }
 
-handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('Submit', this.state)
-    axios.post(`/auth/login`, this.state)
-    .then(response => {
-        //Assign token
-        console.log('Success', response)
-        localStorage.setItem('mernToken', response.data.token)
-        this.props.updateUser()
-    })
-    .catch(err => {
-        console.log('ERROR', err)
-    })
-}
+  handleSubmit = (e) => {
+      e.preventDefault()
+      console.log('Submit', this.state)
+      axios.post(`/auth/login`, this.state)
+      .then(response => {
+          //Assign token
+          console.log('Success', response)
+          localStorage.setItem('mernToken', response.data.token)
+          this.props.updateUser()
+      })
+      .catch(err => {
+          console.log('ERROR', err)
+      })
+  }
 
   render() {
             
@@ -75,15 +75,15 @@ handleSubmit = (e) => {
                   <Card className="bg-secondary shadow border-0">
                     <CardHeader className="bg-white pb-5">
                       <div className="text-muted text-center mb-3">
-                        <small>Sign in with</small>
+                        <small>Log in with</small>
                       </div>
                       <div className="btn-wrapper text-center">
 
                         <Button
                           className="btn-neutral btn-icon ml-1"
                           color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          type="submit"
+                          onSubmit={this.handleSubmit}
                         >
                           <span className="btn-inner--icon mr-1">
                             <img
@@ -99,7 +99,8 @@ handleSubmit = (e) => {
                       <div className="text-center text-muted mb-4">
                         <small>Or sign in with credentials</small>
                       </div>
-                      <form role="form"  onSubmit={this.handleSubmit}>
+
+                      <form>
                         <FormGroup className="mb-3">
                           <InputGroup className="input-group-alternative">
                             <InputGroupAddon addonType="prepend">
@@ -119,7 +120,7 @@ handleSubmit = (e) => {
                               </InputGroupText>
                             </InputGroupAddon>
                             <Input
-                              placeholder="Password" type="password" toComplete="off" onChange={(e) => this.setState({ password: e.target.value})} />
+                              placeholder="Password" type="password" autoComplete="off" onChange={(e) => this.setState({ password: e.target.value})} />
                           </InputGroup>
                         </FormGroup>
 
@@ -128,6 +129,7 @@ handleSubmit = (e) => {
                             className="custom-control-input"
                             id=" customCheckLogin"
                             type="checkbox"
+                            
                           />
                           <label
                             className="custom-control-label"
@@ -136,13 +138,15 @@ handleSubmit = (e) => {
                             <span>Remember me</span>
                           </label>
                         </div>
+
                         <div className="text-center">
                           <Button
                             className="my-4"
                             color="primary"
-                            type="button"
+                            type="submit"
+                            onClick={this.handleSubmit}
                           >
-                            Sign in
+                            Submit
                           </Button>
                         </div>
                       </form>
@@ -161,8 +165,6 @@ handleSubmit = (e) => {
                     <Col className="text-right" xs="6">
                       <a
                         className="text-light"
-                        href="#pablo"
-                        onClick={e => e.preventDefault()}
                       >
                         <small>Create new account</small>
                       </a>

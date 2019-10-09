@@ -9,7 +9,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/project-4', {
 })
 
 module.exports.User = require('./user')
-// module.exports.Event = require('./event')
+module.exports.Event = require('./event')
 
 
 

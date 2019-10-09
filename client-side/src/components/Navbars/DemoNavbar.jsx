@@ -21,7 +21,6 @@ import { Link } from "react-router-dom";
 import Headroom from "headroom.js";
 // reactstrap components
 import {
-  Button,
   UncontrolledCollapse,
   DropdownMenu,
   DropdownItem,
@@ -82,7 +81,7 @@ class DemoNavbar extends React.Component {
           <DropdownItem to="/profile" tag={Link}>
             Profile
           </DropdownItem>
-          <DropdownItem to="/allevents" tag={Link}>
+          <DropdownItem to="/newevents" tag={Link}>
             All Events
           </DropdownItem>
           </span>

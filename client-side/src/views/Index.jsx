@@ -87,7 +87,7 @@ class Index extends React.Component {
           {/* </section> */}
           {/* <Carousel />
           <Icons /> */}
-          <Login />
+          {/* <Login /> */}
           {/* <Download /> */}
         </main>
        

@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
-import ReactDOM from "react-dom";
+
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import "assets/vendor/nucleo/css/nucleo.css";
@@ -13,7 +12,7 @@ import Landing from "views/main/Landing.jsx";
 import Login from "views/main/Login.jsx";
 import Profile from "views/main/Profile.jsx";
 import SignUp from "views/main/SignUp";
-import NewEvents from 'views/EventPlanner/NewEvents';
+import Events from 'views/EventPlanner/Events';
 
 class App extends React.Component {
     state = {
@@ -39,7 +38,7 @@ class App extends React.Component {
         //If there's a token, try to use it to get the user info
         if(token) {
         console.log('token was', token)
-        axios.get(`/auth/current/user`, {
+        axios.get(`http://localhost:3000/auth/current/user`, {
             headers: { 'Authorization': `Bearer ${token}` }
         })
         .then(response => {
@@ -86,7 +85,7 @@ class App extends React.Component {
                     <Route
                         path="/newevents"
                         exact
-                        render={props => <NewEvents {...props} updateUser={this.getUser} user={this.state.user}/>}
+                        render={props => <Events {...props} updateUser={this.getUser} user={this.state.user}/>}
                     />
 
                     <Redirect to="/" updateUser={this.getUser} user={this.state.user}h/>

@@ -1,22 +1,43 @@
 let router = require('express').Router()
 let db = require('../models')
 let mongoose = require('mongoose')
+let moment = require('moment')
 
+// GET - retrieve all events 
+router.get('/', (req, res) => {
+    console.log('GET', req.headers)
+    // console.log(req.user._id)
+    // console.log('this', req.params)
+    // console.log('this is the ', req.params)
+    db.Event.find()
+    // populate('events')
+    .then(events => {
+        res.send(events)
+    }).catch(err => {
+        console.log('GET err', err)
+    })
+})
 
 // POST - create new event
-router.post('/new', (req, res) => {
-    console.log(req.body)
+router.post('/', (req, res) => {
+
+    let date = req.body.date
     db.Event.create({
         eventname: req.body.eventname,
         location: req.body.location,
-        date: req.body.date,
+        date: moment(date).format("MMM Do YY"),
         time: req.body.time,
         description: req.body.description,
-        user: mongoose.Types.ObjectId(req.body.userId),
-    }, (err, newEvent) => {
-        console.log('return from EVENT.CREATE', err, newEvent)
-    } )
+        user: req.user._id
+    }).then(res => {
+        res.send('this is getting sent back,', res)
+    }).catch(err => {
+        console.log('Post err', err)
+    })
+    
     
 })
+
+
 
 module.exports = router;

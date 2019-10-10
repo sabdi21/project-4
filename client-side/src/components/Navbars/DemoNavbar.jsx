@@ -82,6 +82,9 @@ class DemoNavbar extends React.Component {
             Profile
           </DropdownItem>
           <DropdownItem to="/newevents" tag={Link}>
+            My Events
+          </DropdownItem>
+          <DropdownItem to="/allevents" tag={Link}>
             All Events
           </DropdownItem>
           </span>

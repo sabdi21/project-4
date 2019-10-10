@@ -15,11 +15,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import axios from 'axios'
+// import axios from 'axios'
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom'
+// import { BrowserRouter as Router } from 'react-router-dom'
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+// import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 

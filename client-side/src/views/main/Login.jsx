@@ -1,20 +1,4 @@
-/*!
 
-=========================================================
-* Argon Design System React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-design-system-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 
 // reactstrap components
@@ -36,7 +20,7 @@ class Login extends React.Component {
   handleSubmit = (e) => {
       e.preventDefault()
       console.log('Submit', this.state)
-      axios.post(`/auth/login`, this.state)
+      axios.post(`http://localhost:3000/auth/login`, this.state)
       .then(response => {
           //Assign token
           console.log('Success', response)
@@ -154,20 +138,20 @@ class Login extends React.Component {
                   </Card>
                   <Row className="mt-3">
                     <Col xs="6">
-                      <a
+                      {/* <a
                         className="text-light"
                         href="#pablo"
                         onClick={e => e.preventDefault()}
-                      >
+                      > */}
                         <small>Forgot password?</small>
-                      </a>
+                      {/* </a> */}
                     </Col>
                     <Col className="text-right" xs="6">
-                      <a
+                      {/* <a
                         className="text-light"
-                      >
+                      > */}
                         <small>Create new account</small>
-                      </a>
+                      {/* </a> */}
                     </Col>
                   </Row>
                 </Col>

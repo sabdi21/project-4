@@ -7,7 +7,7 @@ let expressJWT = require('express-jwt')
 router.post('/login', (req,res) => {
     // res.send('STUB - POST/LOGIN')
     db.User.findOne({email: req.body.email})
-    // .populate('Property')
+
     .then(user => {
         if (!user || !user.password) {
             return res.status(404).send({ message: 'User not found' })
@@ -63,7 +63,6 @@ router.post('/signup', (req,res) => {
 router.put('/:id', (req,res) => {
     console.log(req.body)
     db.User.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true})
-    // .populate('Property')
     .then(editedUser => {
         let token = jwt.sign(editedUser.toJSON(), process.env.JWT_SECRET, {
             expiresIn: 60*60*8 //in seconds
@@ -76,7 +75,7 @@ router.put('/:id', (req,res) => {
     })
 })
 router.get('/current/user', (req,res) => {
-    console.log(req.user)
+    // console.log(req.user)
     //the user is logged in, so req.user should have data
 
     if(!req.user || !req.user._id) {

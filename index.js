@@ -17,19 +17,22 @@ app.use(express.json({ limit: '10mb' }))
 app.use(cors())
 app.use(morgan('dev'))
 
-//controllers
+//controllers//protects our back-end routes. not accessable unless token is provided
 app.use('/auth',expressJWT({
     secret: process.env.JWT_SECRET
 }).unless({
     path: [
+        //even if you dont have a token/login-info these routes should be available
         {url: '/auth/login', methods: ['POST']},
-        {url: '/auth/signup', methods: ['POST']},
-        // {url: '/auth/current/user', methods: ['PUT']}   
+        {url: '/auth/signup', methods: ['POST']} 
     ]
 }), require('./controllers/auth'));
 
-app.use('/event', require('./controllers/event'));
-
+//protects the token in all routes
+app.use('/event',expressJWT({
+    secret: process.env.JWT_SECRET
+}), require('./controllers/event'));
+//should remove routes to specific end-
 
 //routes
 app.get('*', (req, res) => {
@@ -38,7 +41,7 @@ app.get('*', (req, res) => {
 
 
 //listening
-app.listen(process.env.PORT || 3001, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log('Server started')
     rowdyResults.print()
 })

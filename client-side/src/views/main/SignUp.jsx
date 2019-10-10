@@ -19,7 +19,7 @@ import React from "react";
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 // reactstrap components
-import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Row, Col } from "reactstrap";
+import { Button, Card, CardHeader, CardBody, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Row, Col } from "reactstrap";
 
 // core components
 import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
@@ -93,7 +93,7 @@ g
                       <div className="text-center text-muted mb-4">
                         <small>Or just log-in instead </small>
                       </div>
-                      <form role="form" onSubmit={this.handleSubmit}>
+                      <form onSubmit={this.handleSubmit}>
                         {/* <FormGroup> */}
 
                           <InputGroup className="input-group-alternative mb-3">

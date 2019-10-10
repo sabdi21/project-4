@@ -2,12 +2,12 @@ const mongoose = require ('mongoose');
 const { Schema } = require ('mongoose');
 
 const eventsSchema = new Schema({
-    eventName: {
+    eventname: {
         type: String,
         required: true
     },
     date: {
-        type: Date,
+        type: String,
         require: true
     },
     time: {

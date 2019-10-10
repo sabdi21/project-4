@@ -20,6 +20,7 @@ let userSchema = new mongoose.Schema({
       minlength: 8,
       maxlength: 32
     },
+    profileUrl: String,
     events: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Event'
@@ -29,8 +30,8 @@ let userSchema = new mongoose.Schema({
       ref: 'Event'
     }],
     eventAttending: {
-      tyep: String,
-      // ref: 
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Event'
     }
   })
 

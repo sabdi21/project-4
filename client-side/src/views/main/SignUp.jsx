@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Argon Design System React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-design-system-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
@@ -22,7 +5,7 @@ import axios from 'axios'
 import { Button, Card, CardHeader, CardBody, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Row, Col } from "reactstrap";
 
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
+
 import SimpleFooter from "components/Footers/SimpleFooter.jsx";
 
 
@@ -31,8 +14,9 @@ class SignUp extends React.Component {
     firstname: '',
     lastname: '',
     email: '',
-    password: ''
-    // profileUrl: ''
+    password: '',
+    bio: '',
+    profileUrl: ''
   }
   storeInput = (e) => {
     this.setState({ [e.target.name]: e.target.value })
@@ -44,17 +28,17 @@ handleSubmit = (e) => {
     e.preventDefault()
     console.log('form was submitted', this.state)
     //send the user sig up data to the server
-    axios.post(`/auth/signup`, this.state)
-        .then(response => {
-            console.log('SUCCESS', response)
-            //Store Token in localStorage (with an argument thats specific to your app)
-            localStorage.setItem('mernToken', response.data.token)
-            //Update App with user info
-            this.props.updateUser()
-        })
-        .catch(err => {
-            console.log('ERROR', err)
-        })
+    axios.post(`http://localhost:3000/auth/signup`, this.state)
+      .then(response => {
+          console.log('SUCCESS', response)
+          //Store Token in localStorage (with an argument thats specific to your app)
+          localStorage.setItem('mernToken', response.data.token)
+          //Update App with user info
+          this.props.updateUser()
+      })
+      .catch(err => {
+          console.log('ERROR', err)
+      })
 }
 g
   render() {
@@ -65,7 +49,7 @@ g
         }
     return (
       <>
-        <DemoNavbar />
+        {/* <DemoNavbar /> */}
         <main ref="main">
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-default">
@@ -136,6 +120,19 @@ g
                               name="password" onChange={this.storeInput} 
                             />
                           </InputGroup>
+                          <br />
+                          <InputGroup className="input-group-alternative mb-3">
+                            <InputGroupAddon addonType="prepend">
+                              <InputGroupText>
+                                <i className="ni ni-profile-83" />
+                              </InputGroupText>
+                            </InputGroupAddon>
+                            <Input name="profileUrl" autoComplete="on" placeholder="Your profile image" onChange={this.storeInput}/>
+                          </InputGroup>
+
+                          <Input required type='textarea' maxLength='500' name='details' id='details' rows={4} placeholder='Please provide a quick bio...' aria-multiline='true'/>
+
+
                         {/* </FormGroup> */}
                         <div className="text-muted font-italic">
                           <small>

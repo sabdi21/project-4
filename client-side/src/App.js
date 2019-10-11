@@ -13,6 +13,7 @@ import Login from "views/main/Login.jsx";
 import Profile from "views/main/Profile.jsx";
 import SignUp from "views/main/SignUp";
 import Events from 'views/EventPlanner/Events';
+import DemoNavbar from './components/Navbars/DemoNavbar.jsx'
 
 class App extends React.Component {
     state = {
@@ -31,13 +32,13 @@ class App extends React.Component {
     }
 
     getUser = () => {
-        console.log('in getUSER is firing')
+        console.log('getUSER() is firing')
         //See if there is a token
         let token = localStorage.getItem('mernToken')
 
         //If there's a token, try to use it to get the user info
         if(token) {
-        console.log('token was', token)
+
         axios.get(`http://localhost:3000/auth/current/user`, {
             headers: { 'Authorization': `Bearer ${token}` }
         })
@@ -56,34 +57,33 @@ class App extends React.Component {
 
     render() {
         return (
+            
             <BrowserRouter>
+                <div>
+                {/* <Content updateProfile={this.updateProfile} updateUser={this.getUser} user={this.state.user}/> */}
+                    <DemoNavbar updateProfile={this.updateProfile} updateUser={this.getUser} user={this.state.user}/>
+                </div>
                 <Switch>
-                    <Route path="/" exact render={props => <Landing {...props} />} />
-                    {/* <Route
-                        path="/"
-                        exact
-                        render={props => <Landing {...props} />}
-                    /> */}
+                    <Route path="/" 
+                    exact 
+                    render={props => <Landing {...props} updateProfile={this.updateProfile}/>} />
+                    
                     <Route path="/login" 
                         exact 
-                        render={props => <Login {...props} updateUser={this.getUser} user={this.state.user}/>} />
+                        render={props => <Login {...props} updateProfile={this.updateProfile} updateUser={this.getUser} user={this.state.user}/>} />
                     <Route
                         path="/profile"
                         exact
-                        render={props => <Profile {...props} updateUser={this.getUser} user={this.state.user}/>}
+                        render={props => <Profile {...props} updateProfile={this.updateProfile} updateUser={this.getUser} user={this.state.user}/>}
                     />
                     <Route
                         path="/signup"
                         exact
                         render={props => <SignUp {...props} updateUser={this.getUser} user={this.state.user} />}
                         />
+                    
                     <Route
-                        path="/login"
-                        exact
-                        render={props => <Login {...props} updateUser={this.getUser} user={this.state.user}/>}
-                    />
-                    <Route
-                        path="/newevents"
+                        path="/events"
                         exact
                         render={props => <Events {...props} updateUser={this.getUser} user={this.state.user}/>}
                     />

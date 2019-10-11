@@ -7,7 +7,6 @@ import {
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
 import SimpleFooter from "components/Footers/SimpleFooter.jsx";
 
 class Login extends React.Component {
@@ -40,7 +39,7 @@ class Login extends React.Component {
   
     return (
       <>
-        <DemoNavbar />
+        {/* <DemoNavbar /> */}
         <main ref="main">
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-default">

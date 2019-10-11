@@ -7,7 +7,6 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
 import SimpleFooter from "components/Footers/SimpleFooter";
 
 
@@ -23,7 +22,7 @@ class Landing extends React.Component {
   render() {
     return (
       <>
-      <DemoNavbar />
+      {/* <DemoNavbar updateUser={this.getUser} user={this.state.user}/> */}
       <main ref="main">
         <div className="position-relative">
           {/* shape Hero */}

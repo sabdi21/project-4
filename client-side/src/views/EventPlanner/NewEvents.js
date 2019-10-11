@@ -3,16 +3,9 @@ import React from "react";
 
 
 // reactstrap components
-import { Button, FormGroup, Input, InputGroupAddon, InputGroupText, InputGroup, Container, Row, Col } from "reactstrap";
+import { Button, FormGroup, Input, InputGroupAddon, InputGroupText, InputGroup} from "reactstrap";
 import ReactDatetime from "react-datetime";
 import axios from 'axios'
-// import moment from "moment";
-
-// core components
-import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
-import SimpleFooter from "components/Footers/SimpleFooter";
-import Events from "./Events";
-
 
 
 class NewEvents extends React.Component {

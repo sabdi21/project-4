@@ -25,6 +25,10 @@ let userSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Event'
    }],
+    bio: {
+      type: String,
+      required: true
+    },
     myEvent: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Event'

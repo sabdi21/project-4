@@ -6,11 +6,7 @@ let moment = require('moment')
 // GET - retrieve all events 
 router.get('/', (req, res) => {
     console.log('GET', req.headers)
-    // console.log(req.user._id)
-    // console.log('this', req.params)
-    // console.log('this is the ', req.params)
     db.Event.find()
-    // populate('events')
     .then(events => {
         res.send(events)
     }).catch(err => {
@@ -38,6 +34,43 @@ router.post('/', (req, res) => {
     
 })
 
+//GET ROUTE FOR CURRENT USER EVENTS
+router.get('/:id', (req, res) => {
+    console.log('GET', req.headers)
+    db.Event.findOne()
+    // populate('events')
+    .then(events => {
+        res.send(events)
+    }).catch(err => {
+        console.log('GET err', err)
+    })
+})
 
+
+// PUT/Update route for events
+router.put('/:id', (req, res) => {
+    db.Event.findOneAndUpdate({
+        _id: req.params.id },
+        req.body)
+    .then(editedBounty => {
+        res.send(editedEvent)
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(503).send({message: 'Server Error'})
+    })
+})
+
+//DELETE route for events
+router.delete('/:id', (req,res) => {
+    db.Event.findByIdAndDelete({_id: req.params.id})
+    .then(() => {
+        res.status(204).send()
+    })
+    .catch(err => {
+        console.log('GET ERROR for current user', err)
+        res.status(503).send({message: 'Server Error'})
+    })
+})
 
 module.exports = router;

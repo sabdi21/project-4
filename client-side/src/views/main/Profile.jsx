@@ -1,40 +1,82 @@
-/*!
-
-=========================================================
-* Argon Design System React - v1.0.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-design-system-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-design-system-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
+import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+import classnames from "classnames";
 
 // reactstrap components
-import { Button, Card, Container, Row, Col } from "reactstrap";
+import { Button, Container, Input, Card,
+  CardBody,
+  NavItem,
+  NavLink,
+  Nav,
+  TabContent,
+  TabPane,
+  Row,
+  Col} from "reactstrap";
 
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
 import SimpleFooter from "components/Footers/SimpleFooter.jsx";
 
 class Profile extends React.Component {
-  // componentDidMount() {
-  //   document.documentElement.scrollTop = 0;
-  //   document.scrollingElement.scrollTop = 0;
-  //   this.refs.main.scrollTop = 0;
-  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+        firstname: '',
+        lastname: '',
+        profileUrl: '',
+        bio: '',
+        iconTabs: 1,
+        plainTabs: 1
+        }
+    }
+    handleChange = (e) => {
+        e.preventDefault()
+        this.setState({
+            [e.target.name]: e.target.value,
+        })
+    }
+
+
+    handleSubmit = (e) => {
+        e.preventDefault()
+        let token = localStorage.getItem('mernToken')
+        console.log('user update form was submitted', this.state, token)
+        //send the user sig up data to the server
+        console.log('user info', this.props.user)
+        axios.put(`http://localhost:3000/auth/${this.props.user._id}`, this.state, {
+            headers: { 'Authorization': `Bearer ${token}` }
+            })
+            .then(response => {
+                console.log('SUCCESS', response.data.token, token)
+                //Store Token in localStorage (with an argument thats specific to your app)
+                localStorage.setItem('mernToken', response.data.token)
+
+                //Update App with user info
+                this.props.updateUser()
+                this.setState({
+                    firstname: '',
+                    lastname: '',
+                    profileUrl: ''
+                })
+            })
+            .catch(err => {
+                console.log('ERROR', err.response.data.message)
+            })
+    }
+    toggleNavs = (e, state, index) => {
+      e.preventDefault();
+      this.setState({
+        [state]: index
+      });
+    };
   render() {
+       //If user is not user than redirect to home page
+       if(!this.props.user) {
+        return <Redirect to="/" />
+    }
     return (
       <>
-        <DemoNavbar />
-        <main className="profile-page" ref="main">
+          <main className="profile-page" ref="main">
           <section className="section-profile-cover section-shaped my-0">
             {/* Circles background */}
             <div className="shape shape-style-1 shape-default alpha-4">
@@ -46,10 +88,176 @@ class Profile extends React.Component {
               <span />
               <span />
             </div>
-            {/* SVG separator */}
+
             <div className="separator separator-bottom separator-skew">
               <svg
-                xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="none"
+                version="1.1"
+                viewBox="0 0 2560 100"
+                x="0"
+                y="0"
+              >
+                <polygon
+                  className="fill-white"
+                  points="2560 0 2560 100 0 100"
+                />
+              </svg>
+            </div>
+          </section>
+          <section className="section">
+            <Container className=" mt--300">
+              {/* <Card className="card-profile shadow mt--300"> */}
+                <div className="px-8">
+          
+          <Col lg="6">
+           
+            <div className="mb-3">
+            <h3 className="h4 text-success font-weight-bold mb-4">PROFILE</h3>
+            </div>
+
+            <div className="nav-wrapper">
+              <Nav
+                className="nav-fill flex-column flex-md-row"
+                id="tabs-icons-text"
+                pills
+                role="tablist"
+              >
+                <NavItem>
+                  <NavLink
+                    aria-selected={this.state.iconTabs === 1}
+                    className={classnames("mb-sm-3 mb-md-0", {
+                      active: this.state.iconTabs === 1
+                    })}
+                    onClick={e => this.toggleNavs(e, "iconTabs", 1)}
+                    href="#pablo"
+                    role="tab"
+                  >
+                    <i className="ni ni-hat-3 mr-2" />
+                    {this.props.user.firstname}
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    aria-selected={this.state.iconTabs === 2}
+                    className={classnames("mb-sm-3 mb-md-0", {
+                      active: this.state.iconTabs === 2
+                    })}
+                    onClick={e => this.toggleNavs(e, "iconTabs", 2)}
+                    href="#pablo"
+                    role="tab"
+                  >
+                    <i className="ni ni-bell-55 mr-2" />
+                    Profile
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink
+                    aria-selected={this.state.iconTabs === 3}
+                    className={classnames("mb-sm-3 mb-md-0", {
+                      active: this.state.iconTabs === 3
+                    })}
+                    onClick={e => this.toggleNavs(e, "iconTabs", 3)}
+                    href="#pablo"
+                    role="tab"
+                  >
+                    <i className="ni ni-calendar-grid-58 mr-2" />
+                    My Events
+                  </NavLink>
+                </NavItem>
+              </Nav>
+            </div>
+            <Card className="shadow">
+              <CardBody>
+                <TabContent activeTab={"iconTabs" + this.state.iconTabs}>
+                  <TabPane  tabId="iconTabs1">
+                    <div className="justify-content-center">
+                    <h3 className="text-uppercase ">
+                    {this.props.user.firstname} {this.props.user.lastname}
+                    <div className="card-profile-image ">
+                       
+                          <img
+                            alt="..."
+                            className="square-circle"
+                            src={this.props.user.profileUrl} 
+                          
+                          />
+                        
+                      </div>
+                      <span className="font-weight-light"></span>
+                    </h3>
+                    </div>
+                    <p className="description">
+                      {this.props.user.bio}
+                    </p>
+                  </TabPane>
+                  <TabPane tabId="iconTabs2">
+                  <h3>Update Profile</h3>
+
+                    <form onSubmit={this.handleSubmit}>
+                    <Input className="text-uppercase updateProfile" name="firstname" placeholder={this.props.user.firstname} value={this.state.firstname} onChange={this.handleChange} />
+                    <br /> <br></br>
+                    <Input className="text-uppercase updateProfile" name="lastname" placeholder={this.props.user.lastname} value={this.state.lastname} onChange={this.handleChange} />
+                    <br />
+                    <br />
+                    <Input className="text-uppercase updateProfile" name="profileUrl" placeholder={this.props.user.profileUrl} value={this.state.profileUrl} onChange={this.handleChange}/>
+                    <br />
+                    <Input className="text-uppercase updateProfile" name="bio" placeholder={this.props.user.bio} value={this.state.bio} onChange={this.handleChange}/>
+                     {/* <input className="btn btn-primary" type="submit" />  */}
+                    <Button
+                          type="submit"
+                          className="mr-4"
+                          color="info"
+                          // href="#pablo"
+                          onSubmit={e => e.preventDefault()}
+                          size="sm"
+                        >
+                          Update Profile
+                        </Button>
+
+                    </form>
+                      </TabPane>
+                      <TabPane tabId="iconTabs3">
+                        <p className="description">
+                          TEXT
+                        </p>
+                      </TabPane>
+                    </TabContent>
+                  </CardBody>
+                </Card>
+              </Col>
+              </div>
+              {/* </Card> */}
+              </Container>
+          </section>
+        </main> 
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        {/* <main className="profile-page" ref="main">
+          <section className="section-profile-cover section-shaped my-0">
+            Circles background
+            <div className="shape shape-style-1 shape-default alpha-4">
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+              <span />
+            </div>
+            SVG separator
+            <div className="separator separator-bottom separator-skew">
+              <svg
                 preserveAspectRatio="none"
                 version="1.1"
                 viewBox="0 0 2560 100"
@@ -70,85 +278,62 @@ class Profile extends React.Component {
                   <Row className="justify-content-center">
                     <Col className="order-lg-2" lg="3">
                       <div className="card-profile-image">
-                        <a href="#pablo" onClick={e => e.preventDefault()}>
+                        {/* <a href="#pablo" onClick={e => e.preventDefault()}>
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={require("assets/img/theme/team-4-800x800.jpg")}
+                            src={this.props.user.profileUrl} 
+                            // src={require("assets/img/theme/team-4-800x800.jpg")}
                           />
-                        </a>
-                      </div>
+                        {/* </a> */}
+                      {/* </div>
                     </Col>
                     <Col
                       className="order-lg-3 text-lg-right align-self-lg-center"
                       lg="4"
                     >
                       <div className="card-profile-actions py-4 mt-lg-0">
-                        <Button
-                          className="mr-4"
-                          color="info"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          size="sm"
-                        >
-                          Connect
-                        </Button>
-                        <Button
-                          className="float-right"
-                          color="default"
-                          href="#pablo"
-                          onClick={e => e.preventDefault()}
-                          size="sm"
-                        >
-                          Message
-                        </Button>
+                        
                       </div>
                     </Col>
-                    <Col className="order-lg-1" lg="4">
-                      <div className="card-profile-stats d-flex justify-content-center">
-                        <div>
-                          <span className="heading">22</span>
-                          <span className="description">Friends</span>
-                        </div>
-                        <div>
-                          <span className="heading">10</span>
-                          <span className="description">Photos</span>
-                        </div>
-                        <div>
-                          <span className="heading">89</span>
-                          <span className="description">Comments</span>
-                        </div>
-                      </div>
+                    <Col className="order-lg-1" lg="9">
+
                     </Col>
                   </Row>
                   <div className="text-center mt-5">
                     <h3>
-                      Jessica Jones{" "}
-                      <span className="font-weight-light">, 27</span>
+                    {this.props.user.firstname}'s Profile
+                      <span className="font-weight-light"></span>
                     </h3>
                     <div className="h6 font-weight-300">
                       <i className="ni location_pin mr-2" />
-                      Bucharest, Romania
+                      Greater Seattle Area, Washington
                     </div>
-                    <div className="h6 mt-4">
-                      <i className="ni business_briefcase-24 mr-2" />
-                      Solution Manager - Creative Tim Officer
-                    </div>
-                    <div>
-                      <i className="ni education_hat mr-2" />
-                      University of Computer Science
-                    </div>
-                  </div>
-                  <div className="mt-5 py-5 border-top text-center">
                     <Row className="justify-content-center">
                       <Col lg="9">
-                        <p>
-                          An artist of considerable range, Ryan — the name taken
-                          by Melbourne-raised, Brooklyn-based Nick Murphy —
-                          writes, performs and records all of his own music,
-                          giving it a warm, intimate feel with a solid groove
-                          structure. An artist of considerable range.
-                        </p>
+
+                      <h3>Update Profile</h3>
+                    <form onSubmit={this.handleSubmit}>
+                    <Input className="updateProfile" name="firstname" placeholder={this.props.user.firstname} value={this.state.firstname} onChange={this.handleChange} />
+                    <br /> <br></br>
+                    <Input className="updateProfile" name="lastname" placeholder={this.props.user.lastname} value={this.state.lastname} onChange={this.handleChange} />
+                    <br />
+                    <br />
+                    <Input className="updateProfile" name="profileUrl" placeholder={this.props.user.profileUrl} value={this.state.profileUrl} onChange={this.handleChange}/>
+                    <br />
+                    {/* <input className="btn btn-primary" type="submit" /> */}
+                    {/* <Button
+                          type="submit"
+                          className="mr-4"
+                          color="info"
+                          // href="#pablo"
+                          onSubmit={e => e.preventDefault()}
+                          size="sm"
+                        >
+                          Update Profile
+                        </Button>
+
+                </form>
                         <a href="#pablo" onClick={e => e.preventDefault()}>
                           Show more
                         </a>
@@ -159,8 +344,8 @@ class Profile extends React.Component {
               </Card>
             </Container>
           </section>
-        </main>
-        <SimpleFooter />
+        </main> */}
+        <SimpleFooter />  
       </>
     );
   }

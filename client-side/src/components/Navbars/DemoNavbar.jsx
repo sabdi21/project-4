@@ -35,6 +35,14 @@ import {
 } from "reactstrap";
 
 class DemoNavbar extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state={
+      user: null
+    }
+  }
+
   componentDidMount() {
     let headroom = new Headroom(document.getElementById("navbar-main"));
     // initialise
@@ -57,14 +65,14 @@ class DemoNavbar extends React.Component {
           <DropdownItem to="/profile" tag={Link}>
             Profile
           </DropdownItem>
+          <DropdownItem to="/" tag={Link} onClick={this.handleLogout}>
+          Logout
+          </DropdownItem>
           <DropdownItem to="/myevents" tag={Link}>
             My Events
           </DropdownItem>
-          <DropdownItem to="/newevents" tag={Link}>
+          <DropdownItem to="/events" tag={Link}>
             New Event
-          </DropdownItem>
-          <DropdownItem to="/" tag={Link} onClick={this.handleLogout} >
-            Logout
           </DropdownItem>
         </span>
         )
@@ -78,21 +86,12 @@ class DemoNavbar extends React.Component {
           <DropdownItem to="/signup" tag={Link}>
             Sign Up
           </DropdownItem>
-          <DropdownItem to="/profile" tag={Link}>
-            Profile
-          </DropdownItem>
-          <DropdownItem to="/newevents" tag={Link}>
-            My Events
-          </DropdownItem>
-          <DropdownItem to="/allevents" tag={Link}>
-            All Events
-          </DropdownItem>
           </span>
         )
       }
 
     return (
-      <>
+
         <header className="header-global">
           <Navbar
             className="navbar-main navbar-transparent navbar-light headroom"
@@ -103,9 +102,7 @@ class DemoNavbar extends React.Component {
               <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
                 Shukri's App
               </NavbarBrand>
-              {/* <button className="navbar-toggler" id="navbar_global">
-                <span className="navbar-toggler-icon" />
-              </button> */}
+
               <UncontrolledCollapse navbar toggler="#navbar_global">
                 <div className="navbar-collapse-header">
                   <Row>
@@ -142,7 +139,7 @@ class DemoNavbar extends React.Component {
             </Container>
           </Navbar>
         </header>
-      </>
+
     );
   }
 }

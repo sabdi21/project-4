@@ -1,50 +1,52 @@
 
 import React from "react";
 import axios from 'axios'
-// nodejs library that concatenates classes
-
 
 // reactstrap components
-import { Container, Row, Col } from "reactstrap";
-
-// core components
-import DemoNavbar from "components/Navbars/DemoNavbar.jsx";
-import SimpleFooter from "components/Footers/SimpleFooter";
-
+import { CardBody, Card, Button} from "reactstrap";
 
 class EventListItems extends React.Component {
-  state = {
-        events: []
-    }
-    
-    // componentDidMount() {
-    //     console.log('event component')
-    //     let token = localStorage.getItem('mernToken')
-    //     // console.log('TOOOKKKKKEEEENNN; ', token)
-    //     axios.get(`http://localhost:3000/event/`, {
-    //         headers: { 'Authorization': `Bearer ${token}` }
-    //     })
-    //     .then(response => {
-    //         // console.log('get response', response.data)
-    //         this.setState({events: response.data})
-    //     })
-    //     .catch(err => {
-    //         console.log('Event Error', err)
-    //     })
-    // }
-  render() {
-            let allEvents = (this.state.events || []).map((r,i) => {
-            // return <h1>hello</h1>
-            return <EventListItems 
-                key={i}
-                result={r} //named it this instead
-                user={this.props.user}
-            />
+
+
+    handleDelete = (e) => {
+        e.preventDefault()
+        
+        let token = localStorage.getItem('mernToken')
+        console.log('delete button was clicked', token)
+        console.log('result', this.props.result)
+        let eventId = this.props.result._id
+        axios.delete(`http://localhost:3000/event/${eventId}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
         })
-    return (
+        .then(response => {
+            this.props.result.removeItem()
+            console.log(response)
+
+        })
+        .catch(err => {
+            console.log('ERROR', err)
+        })
+    }
+
+  render() {
+    console.log(this.props.result)
+    return ( 
       <div>
-        <h1>{allEvents}</h1>
-       
+      <Card className="shadow">
+        <CardBody className="event-cards">
+            <h1>{this.props.result.eventname}</h1>
+            <p>{this.props.result.date}</p>
+            <p>{this.props.result.time}</p>
+            <p>{this.props.result.location}</p>
+            <p>{this.props.result.description}</p>
+                <Button
+                      className="my-4"
+                      color="primary"
+                      type="submit"
+                      onClick={this.handleDelete}
+                    > Delete Event </Button>
+          </CardBody>
+        </Card>
       </div>
     );
   }

@@ -31,8 +31,10 @@ The UI Kit used for this project is the Argon Design System created by creative 
 
 
 # Future-Goals:
-I would like to later add a map feature to display multiple events on a single map with a clickable feature to display events.
+- I would like to later add a map feature to display multiple events on a single map with a clickable feature to display events.
 Another feature to add is modifying events based on kid's age.
+- I would also like to implement another feature that allows parents to save events.
+- Google oAuth is also something I'd like try out, since I already have the client side ready for it.
 ## Page Information
 
 Home:  Home page is the landing page of our application where you may access other pages to interact with our site.

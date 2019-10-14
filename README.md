@@ -23,7 +23,7 @@ Run heroku local
 Navigate to localhost:3000 in browser
 
 ### Links
-- Deployed Link: (-------)
+- Deployed Link: (https://kid-play-planner.herokuapp.com)
 - GitHub: (https://github.com/sabdi21/project-4)
 
 ##UI-Kits

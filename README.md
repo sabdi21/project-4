@@ -1,5 +1,5 @@
 # Project 4 - by: Shukri Abdi
-Kid Play Planner is an app for parents who want to find a play date activity arranged by other parents. 
+Kid Play Planner is an app for parents who want to find a play date activity arranged by other parents. More cool features to come!  
 
 # Technologies used
 - MERN Stack

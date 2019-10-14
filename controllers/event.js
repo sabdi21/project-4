@@ -78,12 +78,16 @@ router.post('/', (req, res) => {
 //         console.log('Post err', err)
 //     })  
 // })
-//GET ROUTE FOR CURRENT USER EVENTS
+//GET EVENTS FOR CURRENT USER EVENTS
 router.get('/:id', (req, res) => {
     console.log('GET', req.headers)
-    db.Event.findOne()
+    db.Event.findOne({id: req.params._id})
     // populate('events')
+
     .then(events => {
+        if (!events) {
+            return res.send('Sorry, we are unable to find your events')
+        }
         res.send(events)
     }).catch(err => {
         console.log('GET err', err)

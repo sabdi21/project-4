@@ -12,68 +12,13 @@ import SimpleFooter from "components/Footers/SimpleFooter";
 import MyEventLists from "./MyEventLists.js"
 
 class Landing extends React.Component {
-//   state = {
-//     events: []
-//   }
+  state = {
+    savedEvents: []
+  }
 
-// handleDate = (date) => {
-//     this.setState({ date: date })
-//     console.log(this.date)
-    
-// }
-// handleChange = (e) => {
-//   e.preventDefault()
-//   this.setState({
-//       [e.target.name]: e.target.value,
-//   })
-// }
-
-// componentDidMount() {
-//   console.log('event component')
-//   let token = localStorage.getItem('mernToken')
-//   console.log('USER; ', this.props.user)
-//   axios.get(`http://localhost:3000/event/`, {
-//       headers: { 'Authorization': `Bearer ${token}` }
-//   })
-//   .then(response => {
-//       console.log('SUCESSSSS', response.data)
-//       this.setState({events: response.data})
-//   })
-//   .catch(err => {
-//       console.log('Event Error', err)
-//   })
-// }
-// handleSaveEvent = (e) => {
-//   e.preventDefault()
-//   this.handleDate()
-//   console.log('something was submitted', this.state)
-//   let token = localStorage.getItem('mernToken')
-
-//   console.log('TOOOKKKKKEEEENNN; ', token, this.props.user)
-//   axios.post(`http://localhost:3000/event/${this.props.user._id}`, this.state, {
-//       headers: { 'Authorization': `Bearer ${token}` }
-//   })
-//   .then(response => {
-//       console.log(response)
-//   })
-//   .catch(err => {
-//       console.log('ERROR', err)
-//   })
-  
-//   // console.log('this is the state', this.state)
-// }
 
   render() {
 
-    // let allEvents = (this.state.events || []).map((r,i) => {
-    //   // return <h1>hello</h1>
-    //   return <MyEventLists 
-    //       key={i}
-    //       result={r} //named it this instead
-    //       user={this.props.user}
-    //   />
-    
-  // })
     return (
       <>
       <main ref="main">
@@ -99,10 +44,10 @@ class Landing extends React.Component {
                       <p>Kids Play Planner is an app that allows parents to set up events for children in the Seattle area. </p>
                         <span></span>
                       </h1>
-                          {/* {allEvents} */}
-                      <div >
-                      {/* {allEvents} */}
-                      </div>
+                       
+                      {/* <div >
+                      Saved events
+                      </div> */}
                     </Col>
                   </Row>
                 </div>

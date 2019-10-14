@@ -23,11 +23,12 @@ handleSaveEvent = (e) => {
       <div className="e">
       <Card className="shadow">
         <CardBody className="event-cards">
-            <h1>{this.props.result.eventname}</h1>
-            <h2>{this.props.result.date}</h2>
-            <h2>{this.props.result.time}</h2>
-            <h2>{this.props.result.location}</h2>
-            <h2>{this.props.result.description}</h2>
+             <h2>{this.props.result.eventname}</h2>
+            <p>{this.props.result.date}</p>
+            <p>{this.props.result.time}</p>
+            <p>{this.props.result.location}</p>
+            <p>Child(s): {this.props.result.child}</p>
+            <p>{this.props.result.description}</p>
                 <Button
                       className="my-4"
                       color="primary"

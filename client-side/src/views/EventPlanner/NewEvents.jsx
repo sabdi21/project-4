@@ -99,7 +99,7 @@ class NewEvents extends React.Component {
                             <i className="ni ni-hat-3" />
                         </InputGroupText>
                         </InputGroupAddon>
-                        <Input placeholder="Time" type="time" name="time" onChange={(e) => this.setState({ time: e.target.value})}/>
+                        <Input placeholder="Time" type="test" name="time" onChange={(e) => this.setState({ time: e.target.value})}/>
                         </InputGroup>
                     </FormGroup>
 

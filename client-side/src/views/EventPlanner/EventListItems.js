@@ -33,11 +33,13 @@ class EventListItems extends React.Component {
     return ( 
       <div>
       <Card className="shadow">
+      
         <CardBody className="event-cards">
             <h1>{this.props.result.eventname}</h1>
             <p>{this.props.result.date}</p>
             <p>{this.props.result.time}</p>
             <p>{this.props.result.location}</p>
+            <p>{this.props.result.child}</p>
             <p>{this.props.result.description}</p>
                 <Button
                       className="my-4"

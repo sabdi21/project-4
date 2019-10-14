@@ -85,6 +85,7 @@ class Events extends React.Component {
                         <Row>
                         <Col>
                         <hr />
+                        <h1>{this.props.user.firstname}'s Events</h1>
                         {allEvents}
                         
                         </Col>

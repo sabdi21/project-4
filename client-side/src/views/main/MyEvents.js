@@ -102,7 +102,6 @@ handleSaveEvent = (e) => {
                       </h1>
                           {allEvents}
                       <div >
-                      {/* {allEvents} */}
                       </div>
                     </Col>
                   </Row>

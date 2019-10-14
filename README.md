@@ -6,7 +6,7 @@ Kid Play Planner is an app for parents who want to find a play date activity arr
 - MongoDB
 - Express
 - React
-- Node.js
+- Node.js [ moment, axios, etc ]
 - JWT token auth
 - BCrypt
 - JSX
@@ -37,12 +37,8 @@ Another feature to add is modifying events based on kid's age.
 - Google oAuth is also something I'd like try out, since I already have the client side ready for it.
 ## Page Information
 
-Home:  Home page is the landing page of our application where you may access other pages to interact with our site.
-
-Signup and Login:  A page where you create an account or login to gain access to the main pages, including the profile page.
-
-Profile: Page which displays a signed-up users information with the ability to update their name, email, and profile picture.  Other information displayed includes properties that the user may have booked or rented out.
-
-Events: This page allows the user to see all events Seattle
-
-New Events: Page allows the user to create an event and view their events 
+- Home:  Home page is the landing page of our application where you may access other pages to interact with our site.
+- Signup and Login:  A page where you create an account or login to gain access to the main pages, including the profile page.
+- Profile: Page which displays a signed-up users information with the ability to update their name, email, and profile picture.  Other information displayed includes properties that the user may have booked or rented out.
+- Events: This page allows the user to see all events Seattle
+- New Events: Page allows the user to create an event and view their events 

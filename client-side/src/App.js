@@ -11,8 +11,9 @@ import "assets/scss/argon-design-system-react.scss";
 import Landing from "views/main/Landing.jsx";
 import Login from "views/main/Login.jsx";
 import Profile from "views/main/Profile.jsx";
-import SignUp from "views/main/SignUp";
-import Events from 'views/EventPlanner/Events';
+import SignUp from "views/main/SignUp.jsx";
+import Events from 'views/EventPlanner/Events.jsx';
+import MyEvents from 'views/main/MyEvents.js';
 import DemoNavbar from './components/Navbars/DemoNavbar.jsx'
 
 class App extends React.Component {
@@ -62,11 +63,12 @@ class App extends React.Component {
                 <div>
                 {/* <Content updateProfile={this.updateProfile} updateUser={this.getUser} user={this.state.user}/> */}
                     <DemoNavbar updateProfile={this.updateProfile} updateUser={this.getUser} user={this.state.user}/>
+                    
                 </div>
                 <Switch>
                     <Route path="/" 
                     exact 
-                    render={props => <Landing {...props} updateProfile={this.updateProfile}/>} />
+                    render={props => <Landing {...props} updateProfile={this.updateProfile} updateUser={this.getUser} user={this.state.user}/>} />
                     
                     <Route path="/login" 
                         exact 
@@ -87,7 +89,11 @@ class App extends React.Component {
                         exact
                         render={props => <Events {...props} updateUser={this.getUser} user={this.state.user}/>}
                     />
-
+                    <Route
+                        path="/myevents"
+                        exact
+                        render={props => <MyEvents {...props} updateUser={this.getUser} user={this.state.user}/>}
+                    />
                     <Redirect to="/" updateUser={this.getUser} user={this.state.user}h/>
                 </Switch>
             </BrowserRouter>

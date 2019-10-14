@@ -18,9 +18,7 @@ import { Button, Container, Input, Card,
 import SimpleFooter from "components/Footers/SimpleFooter.jsx";
 
 class Profile extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
+  state = {
         firstname: '',
         lastname: '',
         profileUrl: '',
@@ -28,7 +26,7 @@ class Profile extends React.Component {
         iconTabs: 1,
         plainTabs: 1
         }
-    }
+    
     handleChange = (e) => {
         e.preventDefault()
         this.setState({
@@ -37,43 +35,46 @@ class Profile extends React.Component {
     }
 
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-        let token = localStorage.getItem('mernToken')
-        console.log('user update form was submitted', this.state, token)
-        //send the user sig up data to the server
-        console.log('user info', this.props.user)
-        axios.put(`http://localhost:3000/auth/${this.props.user._id}`, this.state, {
-            headers: { 'Authorization': `Bearer ${token}` }
-            })
-            .then(response => {
-                console.log('SUCCESS', response.data.token, token)
-                //Store Token in localStorage (with an argument thats specific to your app)
-                localStorage.setItem('mernToken', response.data.token)
+  handleSubmit = (e) => {
+      e.preventDefault()
+      let token = localStorage.getItem('mernToken')
+      console.log('user update form was submitted', this.state, token)
+      //send the user sig up data to the server
+      console.log('user info', this.props.user)
+      axios.put(`http://localhost:3000/auth/${this.props.user._id}`, this.state, {
+          headers: { 'Authorization': `Bearer ${token}` }
+          })
+          .then(response => {
+              console.log('SUCCESS', response.data.token, token)
+              //Store Token in localStorage (with an argument thats specific to your app)
+              localStorage.setItem('mernToken', response.data.token)
 
-                //Update App with user info
-                this.props.updateUser()
-                this.setState({
-                    firstname: '',
-                    lastname: '',
-                    profileUrl: ''
-                })
-            })
-            .catch(err => {
-                console.log('ERROR', err.response.data.message)
-            })
-    }
+              //Update App with user info
+              this.props.updateUser()
+              this.setState({
+                  firstname: '',
+                  lastname: '',
+                  profileUrl: ''
+              })
+          })
+          .catch(err => {
+              console.log('ERROR', err.response.data.message)
+          })
+  }
     toggleNavs = (e, state, index) => {
       e.preventDefault();
       this.setState({
         [state]: index
       });
     };
+
   render() {
        //If user is not user than redirect to home page
        if(!this.props.user) {
-        return <Redirect to="/" />
+        return <Redirect to="/profile" />
     }
+
+  
     return (
       <>
           <main className="profile-page" ref="main">
@@ -161,7 +162,7 @@ class Profile extends React.Component {
                     role="tab"
                   >
                     <i className="ni ni-calendar-grid-58 mr-2" />
-                    My Events
+                    Share Events
                   </NavLink>
                 </NavItem>
               </Nav>
@@ -194,14 +195,14 @@ class Profile extends React.Component {
                   <h3>Update Profile</h3>
 
                     <form onSubmit={this.handleSubmit}>
-                    <Input className="text-uppercase updateProfile" name="firstname" placeholder={this.props.user.firstname} value={this.state.firstname} onChange={this.handleChange} />
+                    <Input  name="firstname" placeholder={this.props.user.firstname} value={this.state.firstname} onChange={this.handleChange} />
                     <br /> <br></br>
-                    <Input className="text-uppercase updateProfile" name="lastname" placeholder={this.props.user.lastname} value={this.state.lastname} onChange={this.handleChange} />
+                    <Input name="lastname" placeholder={this.props.user.lastname} value={this.state.lastname} onChange={this.handleChange} />
                     <br />
                     <br />
-                    <Input className="text-uppercase updateProfile" name="profileUrl" placeholder={this.props.user.profileUrl} value={this.state.profileUrl} onChange={this.handleChange}/>
+                    <Input  name="profileUrl" placeholder={this.props.user.profileUrl} value={this.state.profileUrl} onChange={this.handleChange}/>
                     <br />
-                    <Input className="text-uppercase updateProfile" name="bio" placeholder={this.props.user.bio} value={this.state.bio} onChange={this.handleChange}/>
+                    <Input name="bio" placeholder={this.props.user.bio} value={this.state.bio} onChange={this.handleChange}/>
                      {/* <input className="btn btn-primary" type="submit" />  */}
                     <Button
                           type="submit"
@@ -218,7 +219,8 @@ class Profile extends React.Component {
                       </TabPane>
                       <TabPane tabId="iconTabs3">
                         <p className="description">
-                          TEXT
+                          Copy and text this code to your friends to share event.
+                          <h2>KS092VLS56</h2>
                         </p>
                       </TabPane>
                     </TabContent>
@@ -230,121 +232,6 @@ class Profile extends React.Component {
               </Container>
           </section>
         </main> 
-
-
-
-
-
-
-
-
-
-
-
-
-        
-        {/* <main className="profile-page" ref="main">
-          <section className="section-profile-cover section-shaped my-0">
-            Circles background
-            <div className="shape shape-style-1 shape-default alpha-4">
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-              <span />
-            </div>
-            SVG separator
-            <div className="separator separator-bottom separator-skew">
-              <svg
-                preserveAspectRatio="none"
-                version="1.1"
-                viewBox="0 0 2560 100"
-                x="0"
-                y="0"
-              >
-                <polygon
-                  className="fill-white"
-                  points="2560 0 2560 100 0 100"
-                />
-              </svg>
-            </div>
-          </section>
-          <section className="section">
-            <Container>
-              <Card className="card-profile shadow mt--300">
-                <div className="px-4">
-                  <Row className="justify-content-center">
-                    <Col className="order-lg-2" lg="3">
-                      <div className="card-profile-image">
-                        {/* <a href="#pablo" onClick={e => e.preventDefault()}>
-                          <img
-                            alt="..."
-                            className="rounded-circle"
-                            src={this.props.user.profileUrl} 
-                            // src={require("assets/img/theme/team-4-800x800.jpg")}
-                          />
-                        {/* </a> */}
-                      {/* </div>
-                    </Col>
-                    <Col
-                      className="order-lg-3 text-lg-right align-self-lg-center"
-                      lg="4"
-                    >
-                      <div className="card-profile-actions py-4 mt-lg-0">
-                        
-                      </div>
-                    </Col>
-                    <Col className="order-lg-1" lg="9">
-
-                    </Col>
-                  </Row>
-                  <div className="text-center mt-5">
-                    <h3>
-                    {this.props.user.firstname}'s Profile
-                      <span className="font-weight-light"></span>
-                    </h3>
-                    <div className="h6 font-weight-300">
-                      <i className="ni location_pin mr-2" />
-                      Greater Seattle Area, Washington
-                    </div>
-                    <Row className="justify-content-center">
-                      <Col lg="9">
-
-                      <h3>Update Profile</h3>
-                    <form onSubmit={this.handleSubmit}>
-                    <Input className="updateProfile" name="firstname" placeholder={this.props.user.firstname} value={this.state.firstname} onChange={this.handleChange} />
-                    <br /> <br></br>
-                    <Input className="updateProfile" name="lastname" placeholder={this.props.user.lastname} value={this.state.lastname} onChange={this.handleChange} />
-                    <br />
-                    <br />
-                    <Input className="updateProfile" name="profileUrl" placeholder={this.props.user.profileUrl} value={this.state.profileUrl} onChange={this.handleChange}/>
-                    <br />
-                    {/* <input className="btn btn-primary" type="submit" /> */}
-                    {/* <Button
-                          type="submit"
-                          className="mr-4"
-                          color="info"
-                          // href="#pablo"
-                          onSubmit={e => e.preventDefault()}
-                          size="sm"
-                        >
-                          Update Profile
-                        </Button>
-
-                </form>
-                        <a href="#pablo" onClick={e => e.preventDefault()}>
-                          Show more
-                        </a>
-                      </Col>
-                    </Row>
-                  </div>
-                </div>
-              </Card>
-            </Container>
-          </section>
-        </main> */}
         <SimpleFooter />  
       </>
     );

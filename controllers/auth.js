@@ -4,6 +4,13 @@ require('dotenv').config()
 let jwt = require('jsonwebtoken')
 let expressJWT = require('express-jwt')
 
+
+router.post('/events', (req, res) => {
+    db.User.findByIdAndUpdate({ })
+    //google this
+    //figure out how to put an item in an array
+})
+
 router.post('/login', (req,res) => {
     // res.send('STUB - POST/LOGIN')
     db.User.findOne({email: req.body.email})

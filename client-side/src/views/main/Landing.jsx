@@ -1,28 +1,81 @@
 
 import React from "react";
 // nodejs library that concatenates classes
-
+import axios from 'axios'
+import { Redirect } from 'react-router-dom'
 
 // reactstrap components
 import { Container, Row, Col } from "reactstrap";
 
 // core components
 import SimpleFooter from "components/Footers/SimpleFooter";
-
+import MyEventLists from "./MyEventLists.js"
 
 class Landing extends React.Component {
-  state = {
-        firstname: '',
-        lastname: '',
-        email: '',
-        password: '',
-        profileUrl: ''
-    }
+//   state = {
+//     events: []
+//   }
+
+// handleDate = (date) => {
+//     this.setState({ date: date })
+//     console.log(this.date)
+    
+// }
+// handleChange = (e) => {
+//   e.preventDefault()
+//   this.setState({
+//       [e.target.name]: e.target.value,
+//   })
+// }
+
+// componentDidMount() {
+//   console.log('event component')
+//   let token = localStorage.getItem('mernToken')
+//   console.log('USER; ', this.props.user)
+//   axios.get(`http://localhost:3000/event/`, {
+//       headers: { 'Authorization': `Bearer ${token}` }
+//   })
+//   .then(response => {
+//       console.log('SUCESSSSS', response.data)
+//       this.setState({events: response.data})
+//   })
+//   .catch(err => {
+//       console.log('Event Error', err)
+//   })
+// }
+// handleSaveEvent = (e) => {
+//   e.preventDefault()
+//   this.handleDate()
+//   console.log('something was submitted', this.state)
+//   let token = localStorage.getItem('mernToken')
+
+//   console.log('TOOOKKKKKEEEENNN; ', token, this.props.user)
+//   axios.post(`http://localhost:3000/event/${this.props.user._id}`, this.state, {
+//       headers: { 'Authorization': `Bearer ${token}` }
+//   })
+//   .then(response => {
+//       console.log(response)
+//   })
+//   .catch(err => {
+//       console.log('ERROR', err)
+//   })
+  
+//   // console.log('this is the state', this.state)
+// }
 
   render() {
+
+    // let allEvents = (this.state.events || []).map((r,i) => {
+    //   // return <h1>hello</h1>
+    //   return <MyEventLists 
+    //       key={i}
+    //       result={r} //named it this instead
+    //       user={this.props.user}
+    //   />
+    
+  // })
     return (
       <>
-      {/* <DemoNavbar updateUser={this.getUser} user={this.state.user}/> */}
       <main ref="main">
         <div className="position-relative">
           {/* shape Hero */}
@@ -41,18 +94,14 @@ class Landing extends React.Component {
               <Container className="py-lg-md d-flex">
                 <div className="col px-0">
                   <Row>
-                    <Col lg="6">
+                    <Col lg="9">
                       <h1 className="display-3 text-white">
-                        A beautiful Design System{" "}
-                        <span>completed with examples</span>
+                      <p>Kids Play Planner is an app that allows parents to set up events for children in the Seattle area. </p>
+                        <span></span>
                       </h1>
-                      <p className="lead text-white">
-                        The design system comes with four pre-built pages to
-                        help you get started faster. You can change the text and
-                        images and you're good to go.
-                      </p>
-                      <div className="btn-wrapper">
-
+                          {/* {allEvents} */}
+                      <div >
+                      {/* {allEvents} */}
                       </div>
                     </Col>
                   </Row>

@@ -8,24 +8,40 @@ import EventListItems from "./EventListItems"
 
 import SimpleFooter from "components/Footers/SimpleFooter";
 class Events extends React.Component {
-      state = {
-        events: []
+    constructor(props) {
+        super(props)
+        this.state= {
+            userInfo: '',
+            events: []
+        }
     }
     
-    componentDidMount() {
-        console.log('event component')
+    //   state = {
+    //     events: []
+    // }
+    getData = () => {
+         console.log('event component')
         let token = localStorage.getItem('mernToken')
-        console.log('TOOOKKKKKEEEENNN; ', token)
-        axios.get(`http://localhost:3000/event/`, {
+        console.log('TOOOKKKKKEEEENNN; ', this.props.user)
+        axios.get(`http://localhost:3000/event/search/${this.props.user._id}`, {
+        // axios.get(`http://localhost:3000/event/${this.props.user._id}`, {
             headers: { 'Authorization': `Bearer ${token}` }
         })
         .then(response => {
-            // console.log('get response', response.data)
+            console.log('get response', response.data)
             this.setState({events: response.data})
         })
         .catch(err => {
             console.log('Event Error', err)
         })
+    }
+
+    componentDidMount() {
+       
+        if(this.props.user) {
+            this.getData()   
+        }
+        
     }
 
         
@@ -37,12 +53,10 @@ class Events extends React.Component {
                 result={r} //named it this instead
                 user={this.props.user}
             />
-
         })
-
         return (
             <main>
-
+            
             <div className="position-relative">
                 <section className="section section-lg section-shaped pb-250">
                 <div className="shape shape-style-1 shape-default">
@@ -61,7 +75,7 @@ class Events extends React.Component {
                         <Row>
                         <Col lg="6">
 
-                            <NewEvents /> 
+                            <NewEvents user={this.props.user} getData={this.getData} /> 
                   
                             <div className="btn-wrapper">
                             {this.props.result}

@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from 'react-router-dom';
 // nodejs library that concatenates classes
 
 
@@ -14,7 +15,9 @@ class NewEvents extends React.Component {
         date: '',
         time: '',
         location: '',
-        description: ''
+        description: '',
+        child: '',
+        redirect: false
     }
     handleDate = (date) => {
         this.setState({ date: date })
@@ -27,11 +30,12 @@ class NewEvents extends React.Component {
         console.log('something was submitted', this.state)
         let token = localStorage.getItem('mernToken')
 
-        console.log('TOOOKKKKKEEEENNN; ', token)
+        console.log('TOOOKKKKKEEEENNN; ', token, this.props.user)
         axios.post(`http://localhost:3000/event/`, this.state, {
             headers: { 'Authorization': `Bearer ${token}` }
         })
         .then(response => {
+            this.props.getData()
             console.log(response)
         })
         .catch(err => {
@@ -40,13 +44,17 @@ class NewEvents extends React.Component {
         
         // console.log('this is the state', this.state)
     }
+
+
+  
     render() {
         const today = new Date();
         today.setDate(today.getDate() + 1);
 
         return (
             <div>
-                <h1 className="display-3 text-white">
+            {/* {this.state.redirect ? <Redirect to='/events' /> : '' } */}
+            <h1 className="display-3 text-white">
 
                 <span>Create an Event!</span>
                 </h1>
@@ -59,6 +67,17 @@ class NewEvents extends React.Component {
                         </InputGroupText>
                         </InputGroupAddon>
                         <Input placeholder="Event Title..." type="eventname" name="eventname" onChange={(e) => this.setState({ eventname: e.target.value})}/>
+                        </InputGroup>
+                    </FormGroup>
+
+                    <FormGroup className="mb-3">
+                        <InputGroup className="input-group-alternative mb-3">
+                        <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                            <i className="fa fa-user-circle" />
+                        </InputGroupText>
+                        </InputGroupAddon>
+                        <Input placeholder="Child(s) name..." type="child" name="child" onChange={(e) => this.setState({ child: e.target.value})}/>
                         </InputGroup>
                     </FormGroup>
 

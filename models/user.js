@@ -29,14 +29,10 @@ let userSchema = new mongoose.Schema({
       type: String,
       required: true
     },
-    myEvent: [{
+    eventAttending: [{
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Event'
-    }],
-    eventAttending: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Event'
-    }
+    }]
   })
 
   //use bcrypt to hash password

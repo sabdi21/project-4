@@ -15,7 +15,7 @@ class EventListItems extends React.Component {
         console.log('delete button was clicked', token)
         console.log('result', this.props.result)
         let eventId = this.props.result._id
-        axios.delete(`http://localhost:3000/event/${eventId}`, {
+        axios.delete(`http://localhost:3000/event/`, {
             headers: { 'Authorization': `Bearer ${token}` }
         })
         .then(response => {

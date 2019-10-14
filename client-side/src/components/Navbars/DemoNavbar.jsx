@@ -69,7 +69,7 @@ class DemoNavbar extends React.Component {
           Logout
           </DropdownItem>
           <DropdownItem to="/myevents" tag={Link}>
-            My Events
+            All Events
           </DropdownItem>
           <DropdownItem to="/events" tag={Link}>
             New Event
@@ -100,7 +100,7 @@ class DemoNavbar extends React.Component {
           >
             <Container>
               <NavbarBrand className="mr-lg-5" to="/" tag={Link}>
-                Shukri's App
+                Kids Play Planner
               </NavbarBrand>
 
               <UncontrolledCollapse navbar toggler="#navbar_global">
